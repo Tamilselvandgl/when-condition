@@ -1,1 +1,22 @@
+pipeline{
+    agent any
 
+    environment{
+        deploy_to = 'prod'
+    }
+
+    stages{
+        stage('when stage'){
+
+            when{
+
+                environment name :'deploy_to' , value : 'prod'
+            }
+
+            steps{
+
+                echo "deploying to when stage."
+            }
+        }
+    }
+}
