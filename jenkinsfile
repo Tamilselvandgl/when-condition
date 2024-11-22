@@ -2,7 +2,7 @@ pipeline{
     agent any
     parameters{
         string(name:'change_reference',defaultValue:'CH12345',description:'please enter your change reference')
-        booleanparam(name:'is SRE approved ?',defaultValue:true ,description:'is approval ')
+        booleanParam(name:'is SRE approved ?',defaultValue:true ,description:'is approval ')
         choice(name:'vagaigal',choices:'regular\nhotfix',description:'what release is this')
         password(name:'mypassword is',defaultValue:'',description:'enter the password')
     }
