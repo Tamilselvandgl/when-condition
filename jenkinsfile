@@ -1,14 +1,23 @@
 pipeline{
     agent any
     parameters{
-        string(name:'person', defaultValue:'tamil',description:'pera solra')
-
+        string(name:'change_reference',defaultValue:'CH12345',description:'please enter your change reference')
+        booleanparam(name:'is SRE approved ?',defaultValue:true ,description:'is approval ')
+        choices(name:'vagaigal',choices:'regular\nhotfix',description:'what release is this')
+        password(name:'mypassword is',defaultValue:'',description:'enter the password')
     }
-
     stages{
-        stage('parameter build'){
+        stage('deploy to dev'){
             steps{
-                echo "vanakam da mapla ${params.person}"
+                echo "deployed to dev successfully"
+            }
+        }
+        stage('deploy to prod'){
+            steps{
+                echo "your change reference ${params.change_reference}is validated"
+                echo "deploying to prod"
+                echo "this is a ${params.vagaigal}"
+                echo "the password is ${params.mypassword}"
             }
         }
     }
