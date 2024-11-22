@@ -4,7 +4,8 @@ pipeline{
         string(name:'change_reference',defaultValue:'CH12345',description:'please enter your change reference')
         booleanParam(name:'is SRE approved ?',defaultValue:true ,description:'is approval ')
         choice(name:'vagaigal',choices:'regular\nhotfix',description:'what release is this')
-        password(name:'mypassword is',defaultValue:'SECRET',description:'enter the password')
+        password(name:'mypassword is',defaultValue:'',description:'enter the password')
+        credentials(name'mycreds',required:true,description:'mydockercreds')
     }
     stages{
         stage('deploy to dev'){
@@ -18,6 +19,7 @@ pipeline{
                 echo "deploying to prod"
                 echo "this is a ${params.vagaigal}"
                 echo "the password is ${params.mypassword}"
+                echo "selceted credential is ${mycreds}"
             }
         }
     }
