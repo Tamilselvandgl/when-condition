@@ -17,7 +17,7 @@ pipeline{
 
                 anyOf {
                     expression {BRANCH_NAME ==~ /(production|staging)/}
-                    environment name: 'namma_ooru' , value :"dindigul"
+                    environment name: 'namma_ooru' , value :"dindigulu"
                 }
                 
             }
