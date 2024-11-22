@@ -1,50 +1,15 @@
- pipeline{
+pipeline{
     agent any
-    stages{
-        stage('build'){
-            steps{
-                echo "building the application"
-            }
-        }
-           stage('sonar'){
-            steps{
-                echo "sonar scan application"
-            }
-        }
-        stage('dockerbuild'){
-            steps{
-                echo "building the docker application"
-            }
-        }
-        stage('docker push'){
-            steps{
-                echo "pushing  the docker  application"
-            }
-        }
-        stage('deploy to test'){
-            steps{
-                echo "deploying to test environment"
-            }
-        }
-        stage('deploy to stage'){
-            
-            when{
-                branch 'release/*'
-            }
-            steps{
-                echo "deploying to stage environment"
-            }
-        }
-        stage('deploy to prod'){
-            when{
-                //our app should go throught the deploy to prod stage only if the app is going through TAG
-                //VX.X.X ====>v1.2.3 it should be in this format only, if not should skip
-                tag pattern: "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}" , comparator: "REGEXP"
-            }
-            steps{
-                echo "deploying to prod environment"
-            }
-        }
+    parameters{
+        string{name:'person', defaultvalue:'tamil',description:'pera solra'}
 
+    }
+
+    stages{
+        stage('parameter build'){
+            steps{
+                echo "vanakam da mapla ${params.person}"
+            }
+        }
     }
 }
