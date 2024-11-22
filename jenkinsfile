@@ -4,7 +4,7 @@ pipeline{
         string(name:'change_reference',defaultValue:'CH12345',description:'please enter your change reference')
         booleanParam(name:'is SRE approved ?',defaultValue:true ,description:'is approval ')
         choice(name:'vagaigal',choices:'regular\nhotfix',description:'what release is this')
-        password(name:'mypassword is',defaultValue:'',description:'enter the password')
+        password(name:'mypassword is',defaultValue:'dummy',description:'enter the password')
     }
     stages{
         stage('deploy to dev'){
