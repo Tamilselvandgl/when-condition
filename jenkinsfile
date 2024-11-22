@@ -5,7 +5,7 @@ pipeline{
         booleanParam(name:'is SRE approved ?',defaultValue:true ,description:'is approval ')
         choice(name:'vagaigal',choices:'regular\nhotfix',description:'what release is this')
         password(name:'mypassword is',defaultValue:'',description:'enter the password')
-        credentials(name:'mycreds',required:true,description:'mydockercreds')
+        credentials(name:'mycreds',description:'mydockercreds',required:true)
     }
     stages{
         stage('deploy to dev'){
