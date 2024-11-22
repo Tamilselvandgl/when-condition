@@ -1,30 +1,50 @@
 pipeline{
     agent any
-    environment{
-        namma_ooru ="dindigul"
-    }
-
     stages{
-        stage('build only'){
+        stage('build'){
             steps{
-                echo "proceed to build"
+                echo "building the application"
             }
         }
-
-        stage('entha ooru stage'){
-
+           stage('sonar'){
+            steps{
+                echo "sonar scan application"
+            }
+        }
+        stage('dockerbuild'){
+            steps{
+                echo "building the docker application"
+            }
+        }
+        stage('docker push'){
+            steps{
+                echo "pushing  the docker  application"
+            }
+        }
+        stage('deploy to test'){
+            steps{
+                echo "deploying to test environment"
+            }
+        }
+        stage('deploy to stage'){
+            
             when{
-
-                anyOf {
-                    expression {BRANCH_NAME ==~ /(production|staging)/}
-                    environment name: 'namma_ooru' , value :"dindigul"
-                }
-                
+                branch 'release/*'
             }
-
             steps{
-                echo "thambi entha ooru"
+                echo "deploying to stage environment"
             }
         }
+        stage('deploy to prod'){
+            when{
+                //our app should go throught the deploy to prod stage only if the app is going through TAG
+                //VX.X.X ====>v1.2.3 it should be in this format only, if not should skip
+                tag pattern: "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}" , comparator: "REGEXP"
+            }
+            steps{
+                echo "deploying to prod environment"
+            }
+        }
+
     }
 }
