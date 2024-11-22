@@ -1,24 +1,29 @@
 pipeline{
     agent any
-    stages{
+    environment{
+        namma_ooru ="dindigul"
+    }
 
-        stage('build'){
+    stages{
+        stage('build only'){
             steps{
-                echo " building the application"
+                echo "proceed to build"
             }
         }
 
-        stage('deploy to prod'){
+        stage('entha ooru stage'){
 
-            when {
+            when{
 
-                //this stage will trigger if the branch is production /stage
-                expression{ BRANCH_NAME ==~ /(production|staging)/}
+                anyof {
+                    expression {BRANCH_NAME ==~ /{production|staging}/}
+                    environment name: 'namma_ooru' , value :"dindigulu"
+                }
+                
             }
 
             steps{
-
-                echo " deploying to prod"
+                echo "thambi entha ooru"
             }
         }
     }
